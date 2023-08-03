@@ -90,7 +90,7 @@ export default function Contact() {
               type="submit"
               className="block w-full rounded-md bg-blue-500 px-3.5 py-2.5 text-center text-lg font-semibold text-white shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
             >
-              Let's talk
+              Let&apos;s talk
             </button>
           </div>
         </form>
