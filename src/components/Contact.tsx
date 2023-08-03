@@ -1,14 +1,4 @@
-"use client";
-import { useState } from "react";
-import { Switch } from "@headlessui/react";
-import Link from "next/link";
-
-function classNames(...classes: any[]) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default function Contact() {
-  const [agreed, setAgreed] = useState(false);
   return (
     <section className="w-screen h-screen flex items-center justify-center snap-center">
       <div className="bg-black px-6 py-24 sm:py-32 lg:px-8">
