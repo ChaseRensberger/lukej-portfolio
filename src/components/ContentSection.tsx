@@ -15,8 +15,8 @@ export default function ContentSection({
   const isInView = useInView(videoRef);
 
   const [windowDimension, setWindowDimension] = useState({
-    winWidth: window.innerWidth,
-    winHeight: window.innerHeight,
+    winWidth: 0,
+    winHeight: 0,
   });
 
   const detectSize = () => {
