@@ -1,4 +1,51 @@
-export default function Contact() {
+"use client";
+
+import { toast } from "react-hot-toast";
+
+export default async function Contact() {
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const toSend = JSON.stringify({
+      firstName: formData.get("first-name"),
+      lastName: formData.get("last-name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+    });
+
+    const res = await fetch("/api/send", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: toSend,
+    })
+      .then((response) => {
+        console.log(response);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Fetch request was successful:", data);
+        if ("error" in data) {
+          toast.error(
+            "Message did not send. Please email me directly at luke.ab.johnson@gmail.com."
+          );
+        } else {
+          toast.success("Message sent successfully!");
+        }
+      })
+      .catch((error) => {
+        console.log("Fetch request failed:", error);
+
+        toast.error(
+          "Message did not send. Please email me directly at luke.ab.johnson@gmail.com."
+        );
+      });
+  };
+
   return (
     <section className="w-screen h-screen flex items-center justify-center snap-center">
       <div className="bg-black px-6 py-24 sm:py-32 lg:px-8">
@@ -11,9 +58,8 @@ export default function Contact() {
           </p>
         </div>
         <form
-          action="#"
-          method="POST"
           className="mx-auto mt-4 max-w-2xl sm:mt-12"
+          onSubmit={handleSubmit}
         >
           <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
             <div>

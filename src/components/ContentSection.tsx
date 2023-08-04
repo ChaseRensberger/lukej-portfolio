@@ -57,7 +57,6 @@ export default function ContentSection({
         autoPlay
         muted
         playsInline
-        width={1000}
         ref={videoRef}
         className="w-full h-full"
       >

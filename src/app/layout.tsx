@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +18,10 @@ export default function RootLayout({
   return (
     // TODO: Change so i put the snap classes in main element in page.tsx
     <html lang="en" className="snap-y snap-mandatory">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Toaster />
+        {children}
+      </body>
     </html>
   );
 }
