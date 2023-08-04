@@ -24,7 +24,15 @@ export async function POST(request: NextRequest) {
         email: body.email,
         message: body.message,
       }),
-      text: "If you see this please tell Chase and let him know where I can't figure out what it is for.",
+      text: String(
+        body.firstName +
+          " " +
+          body.lastName +
+          " " +
+          body.email +
+          " " +
+          body.message
+      ),
     });
 
     return NextResponse.json(data);
