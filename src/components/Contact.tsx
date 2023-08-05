@@ -3,7 +3,7 @@
 import { toast } from "react-hot-toast";
 
 export default async function Contact() {
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const toSend = JSON.stringify({
@@ -13,7 +13,7 @@ export default async function Contact() {
       message: formData.get("message"),
     });
 
-    const res = await fetch("/api/send", {
+    const res = fetch("/api/send", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,8 +28,8 @@ export default async function Contact() {
         return response.json();
       })
       .then((data) => {
-        console.log("Fetch request was successful:", data);
         if ("error" in data) {
+          console.log("Resend error:", data);
           toast.error(
             "Message did not send. Please email me directly at luke.ab.johnson@gmail.com."
           );
@@ -38,7 +38,7 @@ export default async function Contact() {
         }
       })
       .catch((error) => {
-        console.log("Fetch request failed:", error);
+        console.log("Server error:", error);
 
         toast.error(
           "Message did not send. Please email me directly at luke.ab.johnson@gmail.com."
