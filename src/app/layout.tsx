@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     // TODO: Change so i put the snap classes in main element in page.tsx
-    <html lang="en" className="snap-y snap-mandatory">
+    <html lang="en" className="snap-y snap-mandatory bg-black">
       <body className={inter.className}>
         <Toaster />
         {children}
