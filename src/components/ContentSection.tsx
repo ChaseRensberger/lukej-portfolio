@@ -43,9 +43,12 @@ export default function ContentSection({
   }, []);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.src = getCorrectPath();
-      videoRef.current.load();
+    // if (videoRef.current) {
+    //   videoRef.current.src = getCorrectPath();
+    //   videoRef.current.load();
+    // }
+    if (isInView && videoRef.current) {
+      videoRef.current.play();
     }
   }, [windowDimension]);
 
@@ -60,8 +63,14 @@ export default function ContentSection({
   return (
     <section className="w-screen h-screen flex items-center justify-center snap-center">
       <div ref={markerRef} className="absolute w-12 h-12" />
-      <video muted playsInline ref={videoRef} className="w-full h-full">
-        <source src={getCorrectPath()} type="video/mp4" />
+      <video
+        muted
+        playsInline
+        ref={videoRef}
+        className="w-full h-full"
+        src={getCorrectPath()}
+      >
+        {/* <source src={getCorrectPath()} type="video/mp4" /> */}
       </video>
     </section>
   );
