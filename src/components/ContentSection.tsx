@@ -12,7 +12,8 @@ export default function ContentSection({
   videoUrlVertical,
 }: Props) {
   const videoRef = useRef<any>(null);
-  const isInView = useInView(videoRef);
+  const markerRef = useRef<any>(null);
+  const isInView = useInView(markerRef);
 
   const [windowDimension, setWindowDimension] = useState({
     winWidth: 0,
@@ -34,9 +35,9 @@ export default function ContentSection({
 
   useEffect(() => {
     window.addEventListener("resize", detectSize);
-    if (videoRef.current) {
-      videoRef.current.load();
-    }
+    // if (videoRef.current) {
+    //   videoRef.current.load();
+    // }
 
     return () => {
       window.removeEventListener("resize", detectSize);
@@ -53,13 +54,8 @@ export default function ContentSection({
 
   return (
     <section className="w-screen h-screen flex items-center justify-center snap-center">
-      <video
-        autoPlay
-        muted
-        playsInline
-        ref={videoRef}
-        className="w-full h-full"
-      >
+      <div ref={markerRef} className="absolute w-12 h-12" />
+      <video muted playsInline ref={videoRef} className="w-full h-full">
         <source src={getCorrectPath()} type="video/mp4" />
       </video>
     </section>
