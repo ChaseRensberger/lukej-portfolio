@@ -14,6 +14,7 @@ export default function ContentSection({
   const videoRef = useRef<any>(null);
   const markerRef = useRef<any>(null);
   const isInView = useInView(markerRef);
+  const [isMobile, setIsMobile] = useState(false);
 
   const [windowDimension, setWindowDimension] = useState({
     winWidth: 0,
@@ -27,18 +28,25 @@ export default function ContentSection({
     });
   };
 
+  const updateIsMobile = () => {
+    detectSize();
+    if (windowDimension.winWidth >= windowDimension.winHeight) {
+      setIsMobile(false);
+    } else {
+      setIsMobile(true);
+    }
+  };
+
   const getCorrectPath = () => {
-    return windowDimension.winWidth >= windowDimension.winHeight
-      ? videoUrlHorizontal
-      : videoUrlVertical;
+    return isMobile ? videoUrlVertical : videoUrlHorizontal;
   };
 
   useEffect(() => {
-    detectSize();
-    window.addEventListener("resize", detectSize);
+    updateIsMobile();
+    window.addEventListener("resize", updateIsMobile);
 
     return () => {
-      window.removeEventListener("resize", detectSize);
+      window.removeEventListener("resize", updateIsMobile);
     };
   }, []);
 
@@ -46,7 +54,7 @@ export default function ContentSection({
     if (isInView && videoRef.current) {
       videoRef.current.play();
     }
-  }, [windowDimension]);
+  }, [isMobile]);
 
   useEffect(() => {
     if (isInView && videoRef.current) {
