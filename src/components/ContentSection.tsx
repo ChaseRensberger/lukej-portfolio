@@ -43,10 +43,6 @@ export default function ContentSection({
   }, []);
 
   useEffect(() => {
-    // if (videoRef.current) {
-    //   videoRef.current.src = getCorrectPath();
-    //   videoRef.current.load();
-    // }
     if (isInView && videoRef.current) {
       videoRef.current.play();
     }
@@ -69,9 +65,8 @@ export default function ContentSection({
         ref={videoRef}
         className="w-full h-full"
         src={getCorrectPath()}
-      >
-        {/* <source src={getCorrectPath()} type="video/mp4" /> */}
-      </video>
+      />
+      {/* <source src={getCorrectPath()} type="video/mp4" /> */}
     </section>
   );
 }
