@@ -34,11 +34,19 @@ export default function ContentSection({
   };
 
   useEffect(() => {
+    detectSize();
     window.addEventListener("resize", detectSize);
 
     return () => {
       window.removeEventListener("resize", detectSize);
     };
+  }, []);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.src = getCorrectPath();
+      videoRef.current.load();
+    }
   }, [windowDimension]);
 
   useEffect(() => {
