@@ -2,7 +2,7 @@
 
 import { toast } from "react-hot-toast";
 
-export default async function Contact() {
+export default function Contact() {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     const formData = new FormData(event.target);

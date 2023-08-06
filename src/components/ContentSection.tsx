@@ -35,9 +35,6 @@ export default function ContentSection({
 
   useEffect(() => {
     window.addEventListener("resize", detectSize);
-    // if (videoRef.current) {
-    //   videoRef.current.load();
-    // }
 
     return () => {
       window.removeEventListener("resize", detectSize);
