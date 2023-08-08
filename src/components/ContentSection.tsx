@@ -29,8 +29,15 @@ export default function ContentSection({
   };
 
   const updateVideoPath = () => {
-    detectSize();
-    if (windowDimension.winWidth >= windowDimension.winHeight) {
+    const newWinWidth = window.innerWidth;
+    const newWinHeight = window.innerHeight;
+
+    setWindowDimension({
+      winWidth: newWinWidth,
+      winHeight: newWinHeight,
+    });
+
+    if (newWinWidth >= newWinHeight) {
       setVideoPath(videoUrlHorizontal);
     } else {
       setVideoPath(videoUrlVertical);
