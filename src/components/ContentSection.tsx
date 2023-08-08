@@ -14,7 +14,7 @@ export default function ContentSection({
   const videoRef = useRef<any>(null);
   const markerRef = useRef<any>(null);
   const isInView = useInView(markerRef);
-  const [isMobile, setIsMobile] = useState(false);
+  const [videoPath, setVideoPath] = useState(videoUrlHorizontal);
 
   const [windowDimension, setWindowDimension] = useState({
     winWidth: 0,
@@ -28,25 +28,21 @@ export default function ContentSection({
     });
   };
 
-  const updateIsMobile = () => {
+  const updateVideoPath = () => {
     detectSize();
     if (windowDimension.winWidth >= windowDimension.winHeight) {
-      setIsMobile(false);
+      setVideoPath(videoUrlHorizontal);
     } else {
-      setIsMobile(true);
+      setVideoPath(videoUrlVertical);
     }
   };
 
-  const getCorrectPath = () => {
-    return isMobile ? videoUrlVertical : videoUrlHorizontal;
-  };
-
   useEffect(() => {
-    updateIsMobile();
-    window.addEventListener("resize", updateIsMobile);
+    updateVideoPath();
+    window.addEventListener("resize", updateVideoPath);
 
     return () => {
-      window.removeEventListener("resize", updateIsMobile);
+      window.removeEventListener("resize", updateVideoPath);
     };
   }, []);
 
@@ -54,7 +50,7 @@ export default function ContentSection({
     if (isInView && videoRef.current) {
       videoRef.current.play();
     }
-  }, [isMobile]);
+  }, [videoPath]);
 
   useEffect(() => {
     if (isInView && videoRef.current) {
@@ -72,7 +68,7 @@ export default function ContentSection({
         playsInline
         ref={videoRef}
         className="w-full h-full"
-        src={getCorrectPath()}
+        src={videoPath}
       />
       {/* <source src={getCorrectPath()} type="video/mp4" /> */}
     </section>
