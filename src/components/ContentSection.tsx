@@ -16,26 +16,9 @@ export default function ContentSection({
   const isInView = useInView(markerRef);
   const [videoPath, setVideoPath] = useState(videoUrlHorizontal);
 
-  const [windowDimension, setWindowDimension] = useState({
-    winWidth: 0,
-    winHeight: 0,
-  });
-
-  const detectSize = () => {
-    setWindowDimension({
-      winWidth: window.innerWidth,
-      winHeight: window.innerHeight,
-    });
-  };
-
   const updateVideoPath = () => {
     const newWinWidth = window.innerWidth;
     const newWinHeight = window.innerHeight;
-
-    setWindowDimension({
-      winWidth: newWinWidth,
-      winHeight: newWinHeight,
-    });
 
     if (newWinWidth >= newWinHeight) {
       setVideoPath(videoUrlHorizontal);
