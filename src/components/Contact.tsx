@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { toast } from "react-hot-toast";
 
 export default function Contact() {
+  const [isTalking, setIsTalking] = useState(false);
   const handleSubmit = (event: any) => {
+    setIsTalking(true);
     event.preventDefault();
     const formData = new FormData(event.target);
     const toSend = JSON.stringify({
@@ -21,6 +24,7 @@ export default function Contact() {
       body: toSend,
     })
       .then((response) => {
+        setIsTalking(false);
         console.log(response);
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -28,6 +32,7 @@ export default function Contact() {
         return response.json();
       })
       .then((data) => {
+        setIsTalking(false);
         if ("error" in data) {
           console.log("Resend error:", data);
           toast.error(
@@ -38,6 +43,7 @@ export default function Contact() {
         }
       })
       .catch((error) => {
+        setIsTalking(false);
         console.log("Server error:", error);
 
         toast.error(
@@ -134,7 +140,9 @@ export default function Contact() {
           <div className="mt-10">
             <button
               type="submit"
-              className="block w-full rounded-md bg-blue-500 px-3.5 py-2.5 text-center text-lg font-semibold text-white shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+              className={`block w-full rounded-md bg-blue-500 px-3.5 py-2.5 text-center text-lg font-semibold text-white shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 ${
+                isTalking ? "animate-pulse" : ""
+              }`}
             >
               Let&apos;s talk
             </button>
